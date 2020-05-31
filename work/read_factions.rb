@@ -29,6 +29,7 @@ File.open( 'systems-factions.txt', 'r' ).readlines.each do |line|
 end
 
 File.open( 'factions.json', 'w' ){ |f| f.puts( factions.sort.to_json ) }
+File.open( 'factions_systems.json', 'w' ){ |f| f.puts( systems.to_json ) }
 
 pp systems
 puts

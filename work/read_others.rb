@@ -1,7 +1,9 @@
 require 'pp'
+require 'json'
 
 systems = {}
 planets = {}
+planets_names = []
 
 File.open( 'systems-others.txt', 'r' ).readlines.each do |line|
   # p line
@@ -25,9 +27,14 @@ File.open( 'systems-others.txt', 'r' ).readlines.each do |line|
 
   systems[ faction ] ||= []
   systems[ faction ] << name
+
+  planets_names << name
+
 end
 
 puts
 pp systems
 puts
 pp planets
+
+File.open( 'planets_names.json', 'w' ){ |f| f.puts( planets_names.sort.to_json ) }
