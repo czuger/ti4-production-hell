@@ -1,8 +1,3 @@
-
-Vue.component("tab-usage", {
-    template: "<div>Usage component</div>"
-});
-
 Vue.component("tab-production", {
     template: "<div>Production component</div>"
 });
