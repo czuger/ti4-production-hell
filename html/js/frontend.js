@@ -16,6 +16,6 @@ new Vue({
     computed: {
         currentTabComponent: function() {
             return "tab-" + this.currentTab.toLowerCase();
-        }
+        },
     }
 });
