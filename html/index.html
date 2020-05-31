@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+<!-- Required meta tags -->
+<meta charset='utf-8'>
+<meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'>
+<!-- Bootstrap CSS -->
+<link crossorigin='anonymous' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' rel='stylesheet'>
+<title>Hello, world!</title>
+</head>
+<body>
+<div id='production-hell'>
+<button v-bind:class='[&#39;tab-button&#39;, { active: currentTab === tab }]' v-bind:key='tab' v-for='tab in tabs' v-on:click='currentTab = tab'>
+{{ tab }}
+</button>
+<component class='tab' v-bind:is='currentTabComponent'></component>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script crossorigin='anonymous' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' src='https://code.jquery.com/jquery-3.5.1.slim.min.js'></script>
+<script crossorigin='anonymous' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js'></script>
+<script crossorigin='anonymous' integrity='sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI' src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+<script src='frontend.js'></script>
+</body>
+</html>

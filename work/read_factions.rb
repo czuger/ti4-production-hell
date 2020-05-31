@@ -2,6 +2,7 @@ require 'pp'
 
 systems = {}
 planets = {}
+factions = []
 
 File.open( 'systems-factions.txt', 'r' ).readlines.each do |line|
   # p line
@@ -21,9 +22,14 @@ File.open( 'systems-factions.txt', 'r' ).readlines.each do |line|
 
   systems[ faction ] ||= []
   systems[ faction ] << name
+
+  factions << faction
+  factions.uniq!
 end
 
 puts
 pp systems
 puts
 pp planets
+puts
+pp factions.sort
