@@ -10,13 +10,15 @@
     %title Hello, world!
   %body
 
-    #production-hell
+    .container
+      #production-hell
 
-      %button{ 'v-for' => 'tab in tabs',  'v-bind:key' => 'tab', 'v-on:click' => 'currentTab = tab',
-        'v-bind:class' => "['tab-button', { active: currentTab === tab }]" }
-        {{ tab }}
+        %button{ 'v-for' => 'tab in tabs',  'v-bind:key' => 'tab', 'v-on:click' => 'currentTab = tab',
+          'v-bind:class' => "['tab-button', { active: currentTab === tab }]" }
+          {{ tab }}
 
-      %component.tab{"v-bind:is" => "currentTabComponent"}
+        %component.tab{"v-bind:is" => "currentTabComponent"}
+
 
     / Optional JavaScript
     / jQuery first, then Popper.js, then Bootstrap JS

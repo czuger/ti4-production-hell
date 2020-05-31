@@ -1,4 +1,5 @@
 require 'pp'
+require 'json'
 
 systems = {}
 planets = {}
@@ -27,7 +28,8 @@ File.open( 'systems-factions.txt', 'r' ).readlines.each do |line|
   factions.uniq!
 end
 
-puts
+File.open( 'factions.json', 'w' ){ |f| f.puts( factions.sort.to_json ) }
+
 pp systems
 puts
 pp planets
