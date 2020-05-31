@@ -10,11 +10,9 @@ Vue.component("tab-empire", {
             var result = [];
 
             for( var faction of LsManager.get_selected_items( 'factions' ) ){
-                console.log( faction,  this.factions_planets_hash[ faction ] );
                 result = result.concat( this.factions_planets_hash[ faction ] );
             }
 
-            console.log( result );
             return result;
         }
     },
@@ -25,6 +23,7 @@ Vue.component("tab-empire", {
                 <empire-planet v-bind:planet="planet"></empire-planet>
             </div>
         </div>
+        <br/>
         <div class="row mt-3" v-for="planet in faction_planets">
             <div class="col">
                 <empire-planet v-bind:planet="planet"></empire-planet>

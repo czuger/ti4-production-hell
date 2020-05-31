@@ -44,7 +44,6 @@ class LsManager{
                 }
             }
 
-            console.log( result );
             return result;
         }
         else
