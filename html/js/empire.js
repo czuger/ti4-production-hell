@@ -34,31 +34,11 @@ Vue.component("empire-planet", {
         }
     },
     mounted() {
-        if (localStorage.owned_planets) {
-
-            const _ls = JSON.parse(localStorage.owned_planets);
-
-            // console.log( _ls );
-
-            if (_ls[this.planet]) {
-                this.isActive = _ls[this.planet];
-            }
-        }
+        this.isActive = LsManager.get_value( 'owned_planets', this.planet );
     },
     watch: {
         isActive(newStatus) {
-            console.log(newStatus);
-
-            if (localStorage.owned_planets) {
-                var _ls = localStorage.owned_planets;
-            } else {
-                var _ls = "{}"
-            }
-
-            _ls = JSON.parse(_ls);
-            _ls[this.planet] = newStatus;
-
-            localStorage.owned_planets = JSON.stringify(_ls);
+            LsManager.set_value( 'owned_planets', this.planet, newStatus );
         }
     }
 });
