@@ -16,7 +16,7 @@ File.open( 'systems-factions.txt', 'r' ).readlines.each do |line|
   influence = data[2].to_i
   # p production, influence
 
-  planet_data = { name: name, system: faction, production: production, influence: influence }
+  planet_data = { name: name, system: faction, production: production, influence: influence, skip: nil, type: nil }
   planets[ name ] = planet_data
 
   systems[ faction ] ||= []
