@@ -1,0 +1,26 @@
+Nestphar            Arborec     3 2 -
+Creuss              Creuss      4 2 -
+Hercant             Hacan       1 1 -
+Arretze             Hacan           2 0 -
+Kamdorn             Hacan       0 1 -
+Jol                 Jol-Nar         1 2 -
+Nar                 Jol-Nar     2 3 -
+[0.0.0]             L1Z1X       5 0 -
+Arc Prime           Letnev      4 0 -
+Wren Terra          Letnev      2 1 -
+Moll Primus         Mentak      4 1 -
+Muuat               Muaat       4 1 -
+Druaa               Naalu       3 1 -
+Maaluuk             Naalu       0 2 -
+Mordai II           Nekro Virus     4 0 -
+Lisis II            Saar        1 0 -
+Ragh                Saar        2 1 -
+Tren'Lak            Sardakk N'orr   1 0 -
+Quinarra            Sardakk N'orr   3 1 -
+Jord                Sol         4 2 -
+Winnu               Winnu       3 4 -
+Archon Wren         Xxcha       2 3 -
+Green Archon Tau    Xxcha       1 1 -
+Darien              Yin         4 4 -
+Retillion           Yssaril         2 3 -
+Shalloq             Yssaril         1 2 -

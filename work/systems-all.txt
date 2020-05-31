@@ -1,0 +1,33 @@
+Abyz            Hazardous 3 0 -
+Fria            Hazardous 2 0 -
+Arinam          Industrial 1 2 -
+Meer            Hazardous 0 4 Red
+Arnor           Industrial 2 1 -
+Lor             Industrial 1 2 .
+Bereg           Hazardous 3 1 -
+Lirta IV        Hazardous 2 3 -
+Centauri        Cultural 1 3 -
+Gral            Industrial 1 1 Blue
+Coorneeq        Cultural 1 2 -
+Resculon        Cultural 2 0 -
+Dal Bootha      Cultural 0 2 -
+XXehan          Cultural 1 1 -
+Lazar           Industrial 1 0 Yellow
+Sakulag         Hazardous 2 1 -
+Lodor           Cultural 3 1 -
+Mecatol Rex     None 1 6 -
+Mehar Xull      Hazardous 1 3 Red
+Mellon          Cultural 0 2 -
+Zohbat          Hazardous 3 1 -
+New Albion      Industrial 1 1
+Starpoint       Hazardous 3 1 -
+Quann           Cultural 2 1 -
+Qucen'n         Industrial 1 2
+Rarron          Cultural 0 3 -
+Saudor          Industrial 2 2 -
+Tar'Mann        Industrial 1 1 Green
+Tequ'ran        Hazardous 2 0 -
+Torkan          Cultural 0 3 -
+Thibah          Industrial 1 1 Blue
+Vefut II        Hazardous 2 2 -
+Wellon          Industrial 1 2 Yellow
