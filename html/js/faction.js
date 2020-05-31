@@ -33,31 +33,11 @@ Vue.component("faction-element", {
         }
     },
     mounted() {
-        if (localStorage.isActiveHash) {
-
-            const _ls = JSON.parse( localStorage.isActiveHash );
-
-            // console.log( _ls );
-
-            if( _ls[ this.faction ] ){
-                this.isActive = _ls[ this.faction ];
-            }
-        }
+        this.isActive = LsManager.get_value( 'factions', this.faction );
     },
     watch: {
         isActive(newStatus) {
-            console.log( newStatus );
-
-            if( localStorage.isActiveHash ){
-                var _ls = localStorage.isActiveHash;
-            }else{
-                var _ls = "{}"
-            }
-
-            _ls = JSON.parse( _ls );
-            _ls[ this.faction ] = newStatus;
-
-            localStorage.isActiveHash = JSON.stringify(_ls);
+            LsManager.set_value('factions', this.faction, newStatus);
         }
     }
 

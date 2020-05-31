@@ -29,4 +29,27 @@ class LsManager{
 
         localStorage.setItem( object_name, _data );
     }
+
+    static get_selected_items( object_name ) {
+        var _data = localStorage.getItem(object_name);
+
+        if (_data) {
+            _data = JSON.parse(_data);
+
+            var result = [];
+
+            for (let [key, value] of Object.entries(_data)) {
+                if( value ){
+                    result.push( key )
+                }
+            }
+
+            console.log( result );
+            return result;
+        }
+        else
+        {
+            return [];
+        }
+    }
 };
