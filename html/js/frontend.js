@@ -1,7 +1,7 @@
 new Vue({
     el: "#production-hell",
     data: {
-        currentTab: "Usage",
+        currentTab: "Production",
         tabs: ["Production", "Usage", "Empire", "Faction"]
     },
     computed: {

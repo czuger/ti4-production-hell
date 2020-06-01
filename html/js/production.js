@@ -4,12 +4,16 @@ Vue.component("tab-production", {
     data: function () {
         return {
             available_outputs: ["Infanterie","Chasseurs","Destroyers","Croiseurs","Transporteurs","Cuirassés","Vaisseau amiral","Soleil de guerre"],
-            total_produced_units: 0
+            total_produced_units: 0,
+            selectedDock: "Sur quel dock produisez vous"
         }
     },
     computed: {
         usable_planets: function () {
             return LsManager.get_selected_items('owned_planets');
+        },
+        availableDock: function (){
+            return LsManager.get_selected_items('hasDock');
         }
     },
     methods: {
@@ -24,6 +28,12 @@ Vue.component("tab-production", {
     },
     template: `
     <div>
+        <select v-model="selectedDock" class="form-control mt-3">
+          <option value="Sur quel dock produisez vous" hidden>Sur quel dock produisez vous</option>
+          <option v-for="dock in availableDock" v-bind:value="dock">
+            {{ dock }}
+          </option>
+        </select>
         <div class="row mt-3" v-for="output in available_outputs">
             <div class="col-8">{{ output }}</div>
             <div class="col">
