@@ -16,7 +16,7 @@
 <ul class='nav nav-tabs'>
 <li class='nav-item' v-bind:key='tab' v-for='tab in tabs' v-on:click='currentTab = tab'>
 <a class='nav-link' href='#' v-bind:class='{ active: currentTab === tab }'>
-<img class='tab-picture' v-bind:src='&#39;pics/&#39; + tab + &#39;.svg&#39;'>
+<img class='tab-picture' v-bind:src='&#39;pics/&#39; + tab.toLowerCase() + &#39;.svg&#39;'>
 </a>
 </li>
 </ul>

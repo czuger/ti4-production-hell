@@ -1,7 +1,7 @@
 Vue.component("tab-usage", {
     computed: {
         usablePlanets: function () {
-            return LsManager.get_selected_items( 'owned_planets' );
+            return LsManager.get_selected_items( 'ownedPlanets' );
         }
     },
     template: `

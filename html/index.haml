@@ -18,7 +18,7 @@
         %ul.nav.nav-tabs
           %li.nav-item{ 'v-for' => 'tab in tabs',  'v-bind:key' => 'tab', 'v-on:click' => 'currentTab = tab' }
             %a.nav-link{ 'v-bind:class' => '{ active: currentTab === tab }', 'href' => '#' }
-              %img.tab-picture{ 'v-bind:src' => "'pics/' + tab + '.svg'" }
+              %img.tab-picture{ 'v-bind:src' => "'pics/' + tab.toLowerCase() + '.svg'" }
 
         %component.tab{"v-bind:is" => "currentTabComponent"}
 
@@ -32,7 +32,6 @@
     %script{ src: 'https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.10.2/underscore-min.js' }
 
     %script{:src => "js/local_storage.js"}
-    %script{:src => "js/global_vars.js"}
     %script{:src => "js/empire.js"}
     %script{:src => "js/faction.js"}
     %script{:src => "js/usage.js"}
