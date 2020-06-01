@@ -57,6 +57,11 @@ Vue.component("empire-planet", {
     watch: {
         isActive(newStatus) {
             LsManager.set_value( 'ownedPlanets', this.planet, newStatus );
+
+            // If we loose the system, technically we loose the dock.
+            if( !newStatus ){
+                LsManager.set_value( 'hasDock', this.planet, newStatus );
+            }
         }
     }
 });
