@@ -3,8 +3,12 @@
 Vue.component("tab-production", {
     data: function () {
         return {
-            available_outputs: ["Infanterie","Chasseurs","Destroyers","Croiseurs","Transporteurs","Cuirassés","Vaisseau amiral","Soleil de guerre"],
+            availableUnits: ["Infanterie","Chasseurs","Destroyers","Croiseurs","Transporteurs","Cuirassés","Vaisseau amiral","Soleil de guerre"],
+            unitsCost: {"Infanterie": 0.5,"Chasseurs": 0.5,"Destroyers": 1,"Croiseurs": 2,"Transporteurs": 3,"Cuirassés": 4,"Vaisseau amiral": 8,"Soleil de guerre": 12},
+            planetsInSameSystem: {"Abyz":["Abyz","Fria"],"Fria":["Abyz","Fria"],"Arinam":["Arinam","Meer"],"Meer":["Arinam","Meer"],"Arnor":["Arnor","Lor"],"Lor":["Arnor","Lor"],"Bereg":["Bereg","Lirta IV"],"Lirta IV":["Bereg","Lirta IV"],"Centauri":["Centauri","Gral"],"Gral":["Centauri","Gral"],"Coorneeq":["Coorneeq","Resculon"],"Resculon":["Coorneeq","Resculon"],"Dal Bootha":["Dal Bootha","XXehan"],"XXehan":["Dal Bootha","XXehan"],"Lazar":["Lazar","Sakulag"],"Sakulag":["Lazar","Sakulag"],"Lodor":["Lodor"],"Mecatol Rex":["Mecatol Rex"],"Mehar Xull":["Mehar Xull"],"Mellon":["Mellon","Zohbat"],"Zohbat":["Mellon","Zohbat"],"New Albion":["New Albion","Starpoint"],"Starpoint":["New Albion","Starpoint"],"Quann":["Quann"],"Qucen'n":["Qucen'n","Rarron"],"Rarron":["Qucen'n","Rarron"],"Saudor":["Saudor"],"Tar'Mann":["Tar'Mann"],"Tequ'ran":["Tequ'ran","Torkan"],"Torkan":["Tequ'ran","Torkan"],"Thibah":["Thibah"],"Vefut II":["Vefut II"],"Wellon":["Wellon"],"Nestphar":["Nestphar"],"Creuss":["Creuss"],"Hercant":["Hercant","Arretze","Kamdorn"],"Arretze":["Hercant","Arretze","Kamdorn"],"Kamdorn":["Hercant","Arretze","Kamdorn"],"Jol":["Jol","Nar"],"Nar":["Jol","Nar"],"[0.0.0]":["[0.0.0]"],"Arc Prime":["Arc Prime","Wren Terra"],"Wren Terra":["Arc Prime","Wren Terra"],"Moll Primus":["Moll Primus"],"Muuat":["Muuat"],"Druaa":["Druaa","Maaluuk"],"Maaluuk":["Druaa","Maaluuk"],"Mordai II":["Mordai II"],"Lisis II":["Lisis II","Ragh"],"Ragh":["Lisis II","Ragh"],"Tren'Lak":["Tren'Lak","Quinarra"],"Quinarra":["Tren'Lak","Quinarra"],"Jord":["Jord"],"Winnu":["Winnu"],"Archon Wren":["Archon Wren","Green Archon Tau"],"Green Archon Tau":["Archon Wren","Green Archon Tau"],"Darien":["Darien"],"Retillion":["Retillion","Shalloq"],"Shalloq":["Retillion","Shalloq"]},
+            planetsProductionValue: {"Abyz":3,"Fria":2,"Arinam":1,"Meer":0,"Arnor":2,"Lor":1,"Bereg":3,"Lirta IV":2,"Centauri":1,"Gral":1,"Coorneeq":1,"Resculon":2,"Dal Bootha":0,"XXehan":1,"Lazar":1,"Sakulag":2,"Lodor":3,"Mecatol Rex":1,"Mehar Xull":1,"Mellon":0,"Zohbat":3,"New Albion":1,"Starpoint":3,"Quann":2,"Qucen'n":1,"Rarron":0,"Saudor":2,"Tar'Mann":1,"Tequ'ran":2,"Torkan":0,"Thibah":1,"Vefut II":2,"Wellon":1,"Nestphar":3,"Creuss":4,"Hercant":1,"Arretze":2,"Kamdorn":0,"Jol":1,"Nar":2,"[0.0.0]":5,"Arc Prime":4,"Wren Terra":2,"Moll Primus":4,"Muuat":4,"Druaa":3,"Maaluuk":0,"Mordai II":4,"Lisis II":1,"Ragh":2,"Tren'Lak":1,"Quinarra":3,"Jord":4,"Winnu":3,"Archon Wren":2,"Green Archon Tau":1,"Darien":4,"Retillion":2,"Shalloq":1},
             total_produced_units: 0,
+            total_cost: 0,
             selectedDock: "Sur quel dock produisez vous"
         }
     },
@@ -14,16 +18,36 @@ Vue.component("tab-production", {
         },
         availableDock: function (){
             return LsManager.get_selected_items('hasDock');
+        },
+        maxUnits: function (){
+            var dockList = LsManager.get_selected_items('hasDock');
+            var planetsInSystem = this.planetsInSameSystem[ this.selectedDock ];
+            var docks = _.intersection(dockList, planetsInSystem);
+
+            var result = 0;
+
+            for( var dock of docks ){
+                result += ( this.planetsProductionValue[ dock ] + 2 )
+            }
+
+            return result;
         }
     },
     methods: {
-        onUpdateProduction: function () {
-            var amount = 0;
+        onUpdateProduction: function (unitType) {
+            const unitCost = this.unitsCost[ unitType ];
+
+            var amount = 0
+            var cost = 0;
+
             $('.produced_units').each(function(){
+
                 amount += parseInt($(this).val());
+                cost = cost + unitCost;
             });
 
             this.total_produced_units = amount;
+            this.total_cost = Math.ceil( cost );
         }
     },
     template: `
@@ -34,26 +58,41 @@ Vue.component("tab-production", {
             {{ dock }}
           </option>
         </select>
-        <div class="row mt-3" v-for="output in available_outputs">
-            <div class="col-8">{{ output }}</div>
+        <div class="row mt-3" v-for="unit in availableUnits">
+            <div class="col-8">{{ unit }}</div>
             <div class="col">
                 <!--The event catcher has to be on the component caller-->
-                <available-output v-bind:output_type="output" v-on:update-production="onUpdateProduction"></available-output>
+                <available-output v-bind:unitType="unit" v-on:update-production="onUpdateProduction( unit )"></available-output>
             </div>
         </div>                           
         <div class="row mt-3">
-            <div class="col-8">Nombre d'unités</div>
             <div class="col">
-                {{ total_produced_units }}
+                <button type="button" class="btn" v-bind:class="[total_produced_units <= maxUnits ? 'btn-success' : 'btn-danger']">
+                    Nombre d'unités 
+                    <span class="badge badge-light">{{ total_produced_units }}</span>
+                    /
+                    <span class="badge badge-light">{{ maxUnits }} </span>
+                </button>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button type="button" class="btn" v-bind:class="[total_produced_units <= maxUnits ? 'btn-success' : 'btn-danger']">
+                    Cout total
+                    <span class="badge badge-light">{{ total_produced_units }}</span>
+                    /
+                    <span class="badge badge-light">{{ maxUnits }} </span>
+                </button>
             </div>
         </div>                           
+                                   
         
     </div>
 `
 });
 
 Vue.component("available-output", {
-    props: ['output_type'],
+    props: ['unitType'],
     data() {
         return {
             amount: 0
@@ -62,18 +101,5 @@ Vue.component("available-output", {
     template: `
         <!--The event name you send has to be Kebab case, Camel case won't work-->
         <input class="produced_units" type="number" v-model="amount" v-on:change="$emit('update-production')">
-    `,
-    methods: {
-        planet_engage: function () {
-            this.isActive = !this.isActive;
-        }
-    },
-    mounted() {
-        this.isActive = LsManager.get_value( 'outputs', this.planet );
-    },
-    watch: {
-        isActive(newStatus) {
-            LsManager.set_value( 'outputs', this.planet, newStatus );
-        }
-    }
+    `
 });

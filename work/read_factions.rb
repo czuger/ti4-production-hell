@@ -30,9 +30,4 @@ end
 
 File.open( 'factions.json', 'w' ){ |f| f.puts( factions.sort.to_json ) }
 File.open( 'factions_systems.json', 'w' ){ |f| f.puts( systems.to_json ) }
-
-pp systems
-puts
-pp planets
-puts
-pp factions.sort
+File.open( 'factions_planets.json', 'w' ){ |f| f.puts( planets.to_json ) }

@@ -32,9 +32,6 @@ File.open( 'systems-others.txt', 'r' ).readlines.each do |line|
 
 end
 
-puts
-pp systems
-puts
-pp planets
-
+File.open( 'planets_systems.json', 'w' ){ |f| f.puts( systems.to_json ) }
 File.open( 'planets_names.json', 'w' ){ |f| f.puts( planets_names.sort.to_json ) }
+File.open( 'other_planets.json', 'w' ){ |f| f.puts( planets.to_json ) }
