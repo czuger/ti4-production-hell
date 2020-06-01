@@ -9,8 +9,39 @@ Vue.component("tab-usage", {
         <div v-for="planet in usablePlanets">
             <usable-planet v-bind:planet="planet"></usable-planet>        
         </div>                           
+        <sarween-tools></sarween-tools>
     </div>
 `
+});
+
+Vue.component("sarween-tools", {
+    data() {
+        return {
+            own: false
+        };
+    },
+    template: `
+        <div class="row mt-3">
+            <div class="col-12">
+                <button type="button" class="btn btn-block" @click="getTool()" v-bind:class="[own ? 'btn-warning' : 'btn-info']">
+                    Outils Sarween
+                </button>
+            </div>
+        </div>
+    `,
+    methods: {
+        getTool: function () {
+            this.own = !this.own;
+        }
+    },
+    mounted() {
+        this.own = LsManager.get_value( 'sarweenTools', 'own' );
+    },
+    watch: {
+        own(newStatus) {
+            LsManager.set_value( 'sarweenTools', 'own', newStatus );
+        }
+    }
 });
 
 Vue.component("usable-planet", {

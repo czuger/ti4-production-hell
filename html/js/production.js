@@ -40,8 +40,6 @@ Vue.component("tab-production", {
 
             const usablePlanets = _.difference(empire, engagedPlanets);
 
-            console.log( usablePlanets );
-
             var result = 0;
 
             for( var planet of usablePlanets ){
@@ -57,6 +55,9 @@ Vue.component("tab-production", {
             var totalAmount = 0
             var totalCost = 0;
 
+            const hasSarweenTools = LsManager.get_value( 'sarweenTools', 'own' );
+            console.log( hasSarweenTools );
+
             $('.produced_units').each(function(){
 
                 const amount = parseInt($(this).val());
@@ -67,8 +68,11 @@ Vue.component("tab-production", {
                 const cost = unitCost * amount;
 
                 totalCost += cost;
-                console.log( cost );
             });
+
+            if( hasSarweenTools && totalCost > 0 ){
+                totalCost -= 1;
+            }
 
             this.totalProducedUnits = totalAmount;
             this.totalCost = Math.ceil( totalCost );
