@@ -9,6 +9,7 @@ Vue.component("tab-production", {
     data: function () {
         return {
             availableUnits: ["Infanterie","Chasseurs","Destroyers","Croiseurs","Transporteurs","Cuirassés","Vaisseau amiral","Soleil de guerre"],
+            producedUnits: {"Infanterie": 0,"Chasseurs": 0,"Destroyers": 0,"Croiseurs": 0,"Transporteurs": 0,"Cuirassés": 0,"Vaisseau amiral": 0,"Soleil de guerre": 0},
             totalProducedUnits: 0,
             totalCost: 0,
             selectedDock: "Sur quel dock produisez vous"
@@ -51,25 +52,27 @@ Vue.component("tab-production", {
 
     },
     methods: {
-        onUpdateProduction: function (unitType) {
+        onUpdateProduction: function (_data) {
+            // console.log( 'update' );
+            console.log( _data );
+
             var totalAmount = 0
             var totalCost = 0;
 
-            const hasSarweenTools = LsManager.get_value( 'sarweenTools', 'own' );
-            console.log( hasSarweenTools );
+            let unit, new_amount;
+            [ unit, new_amount ] = _data
+            this.producedUnits[ unit ] = new_amount;
 
-            $('.produced_units').each(function(){
-
-                const amount = parseInt($(this).val());
+            for (let [unit, amount] of Object.entries(this.producedUnits)) {
                 totalAmount += amount;
 
-                const _ut = $(this).attr('unit_name');
-                const unitCost = unitsCost[ _ut ];
+                const unitCost = unitsCost[ unit ];
                 const cost = unitCost * amount;
 
                 totalCost += cost;
-            });
+            }
 
+            const hasSarweenTools = ( LsManager.get_value( 'sarweenTools', 'own' ) === true );
             if( hasSarweenTools && totalCost > 0 ){
                 totalCost -= 1;
             }
@@ -87,10 +90,10 @@ Vue.component("tab-production", {
           </option>
         </select>
         <div class="row mt-3" v-for="unit in availableUnits">
-            <div class="col-8">{{ unit }}</div>
+            <div class="col-6">{{ unit }}</div>
             <div class="col">
                 <!--The event catcher has to be on the component caller-->
-                <available-output v-bind:unitType="unit" v-on:update-production="onUpdateProduction( unit )"></available-output>
+                <available-output v-bind:unitType="unit" v-on:update-production="onUpdateProduction"></available-output>
             </div>
         </div>                           
         <div class="row mt-3">
@@ -126,8 +129,30 @@ Vue.component("available-output", {
             amount: 0
         };
     },
+    methods: {
+        onAdd: function (_ut) {
+            this.amount += 1;
+            this.$emit('update-production', [_ut, this.amount] );
+        },
+        onRemove: function (_ut) {
+            this.amount -= 1;
+            if( this.amount < 0){ this.amount = 0; }
+            this.$emit('update-production', [_ut, this.amount] );
+        }
+    },
     template: `
-        <!--The event name you send has to be Kebab case, Camel case won't work-->
-        <input class="produced_units" v-bind:unit_name="this.unitType" type="number" v-model="amount" v-on:change="$emit('update-production')">
+        <div>
+            <button class="btn btn-danger" @click="onRemove(unitType)">
+            -
+            </button>
+            <!--The event name you send has to be Kebab case, Camel case won't work-->
+            <!--<input class="produced_units" v-bind:unit_name="this.unitType" type="number" v-model="amount" v-on:change="$emit('update-production')">-->
+            <button class="btn btn-light">
+            {{ amount }}
+            </button>
+            <button class="btn btn-success" @click="onAdd(unitType)">
+            +
+            </button>
+        </div>
     `
 });
