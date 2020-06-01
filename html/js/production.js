@@ -33,7 +33,24 @@ Vue.component("tab-production", {
             }
 
             return result;
+        },
+        maxProduction: function (){
+            const empire = LsManager.get_selected_items('ownedPlanets');
+            const engagedPlanets = LsManager.get_selected_items('engagedPlanets');
+
+            const usablePlanets = _.difference(empire, engagedPlanets);
+
+            console.log( usablePlanets );
+
+            var result = 0;
+
+            for( var planet of usablePlanets ){
+                result += ( planetsProductionValue[ planet ] )
+            }
+
+            return result;
         }
+
     },
     methods: {
         onUpdateProduction: function (unitType) {
@@ -74,7 +91,7 @@ Vue.component("tab-production", {
         </div>                           
         <div class="row mt-3">
             <div class="col">
-                <button type="button" class="btn" v-bind:class="[totalProducedUnits <= maxUnits ? 'btn-success' : 'btn-danger']">
+                <button type="button" class="btn btn-block" v-bind:class="[totalProducedUnits <= maxUnits ? 'btn-success' : 'btn-danger']">
                     Nombre d'unités 
                     <span class="badge badge-light">{{ totalProducedUnits }}</span>
                     /
@@ -84,11 +101,11 @@ Vue.component("tab-production", {
         </div>
         <div class="row mt-3">
             <div class="col">
-                <button type="button" class="btn" v-bind:class="[totalProducedUnits <= maxUnits ? 'btn-success' : 'btn-danger']">
+                <button type="button" class="btn btn-block" v-bind:class="[totalCost <= maxProduction ? 'btn-success' : 'btn-danger']">
                     Cout total
                     <span class="badge badge-light">{{ totalCost }}</span>
                     /
-                    <span class="badge badge-light">{{ maxUnits }} </span>
+                    <span class="badge badge-light">{{ maxProduction }} </span>
                 </button>
             </div>
         </div>                           

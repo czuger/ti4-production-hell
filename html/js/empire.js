@@ -52,11 +52,11 @@ Vue.component("empire-planet", {
         }
     },
     mounted() {
-        this.isActive = LsManager.get_value( 'owned_planets', this.planet );
+        this.isActive = LsManager.get_value( 'ownedPlanets', this.planet );
     },
     watch: {
         isActive(newStatus) {
-            LsManager.set_value( 'owned_planets', this.planet, newStatus );
+            LsManager.set_value( 'ownedPlanets', this.planet, newStatus );
         }
     }
 });
