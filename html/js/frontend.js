@@ -1,11 +1,7 @@
-Vue.component("tab-production", {
-    template: "<div>Production component</div>"
-});
-
 new Vue({
     el: "#production-hell",
     data: {
-        currentTab: "Empire",
+        currentTab: "Production",
         tabs: ["Production", "Usage", "Empire", "Faction"]
     },
     computed: {
