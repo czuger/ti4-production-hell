@@ -14,13 +14,11 @@ Vue.component("tab-production", {
     },
     methods: {
         onUpdateProduction: function () {
-            console.log( 'foo' );
             var amount = 0;
             $('.produced_units').each(function(){
                 amount += parseInt($(this).val());
             });
 
-            console.log( amount );
             this.total_produced_units = amount;
         }
     },
@@ -56,7 +54,7 @@ Vue.component("available-output", {
         <input class="produced_units" type="number" v-model="amount" v-on:change="$emit('update-production')">
     `,
     methods: {
-        planet_select: function () {
+        planet_engage: function () {
             this.isActive = !this.isActive;
         }
     },

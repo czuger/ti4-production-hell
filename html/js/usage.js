@@ -1,15 +1,13 @@
 Vue.component("tab-usage", {
     computed: {
-        usable_planets: function () {
+        usablePlanets: function () {
             return LsManager.get_selected_items( 'owned_planets' );
         }
     },
     template: `
     <div>
-        <div class="row mt-3" v-for="planet in usable_planets">
-            <div class="col">
-                <usable-planet v-bind:planet="planet"></usable-planet>
-            </div>
+        <div v-for="planet in usablePlanets">
+            <usable-planet v-bind:planet="planet"></usable-planet>        
         </div>                           
     </div>
 `
@@ -19,25 +17,43 @@ Vue.component("usable-planet", {
     props: ['planet'],
     data() {
         return {
-            isActive: false
+            planetEngaged: true,
+            hasDock: false
         };
     },
     template: `
-        <button type="button" class="btn btn-block" @click="planet_select()" v-bind:class="[isActive ? 'btn-primary' : 'btn-secondary']">
-            {{ planet }}
-        </button>
+        <div class="row mt-3">
+            <div class="col-9">
+                <button type="button" class="btn btn-block" @click="planetEngage()" v-bind:class="[planetEngaged ? 'btn-primary' : 'btn-secondary']">
+                    {{ planet }}
+                </button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-block" @click="setDock()" v-bind:class="[hasDock ? 'btn-warning' : 'btn-secondary']">
+                    {{ hasDock ? 'Dock' : 'Rien' }}
+                </button>
+            </div>                
+        </div>
     `,
     methods: {
-        planet_select: function () {
-            this.isActive = !this.isActive;
+        planetEngage: function () {
+            this.planetEngaged = !this.planetEngaged;
+        },
+        setDock: function () {
+            this.hasDock = !this.hasDock;
         }
     },
     mounted() {
-        this.isActive = LsManager.get_value( 'used_planets', this.planet );
+        this.planetEngaged = LsManager.get_value( 'engagedPlanets', this.planet );
+        this.hasDock = LsManager.get_value( 'hasDock', this.planet );
     },
     watch: {
-        isActive(newStatus) {
-            LsManager.set_value( 'used_planets', this.planet, newStatus );
+        planetEngaged(newStatus) {
+            LsManager.set_value( 'engagedPlanets', this.planet, newStatus );
+        },
+        hasDock(newStatus) {
+            LsManager.set_value( 'hasDock', this.planet, newStatus );
         }
+
     }
 });
