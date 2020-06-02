@@ -1,6 +1,21 @@
+let language = window.navigator.userLanguage || window.navigator.language;
+let locale = null;
+
+if( language ){
+    language = language.substring( 0, 2 );
+
+    if( language == 'fr' ){
+        locale = 'fr';
+    }
+    else
+    {
+        locale = 'en';
+    }
+}
+
 // Create VueI18n instance with options
 const i18n = new VueI18n({
-    locale: 'en', // set locale
+    locale: locale, // set locale
     messages, // set locale messages
 });
 

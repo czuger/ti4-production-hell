@@ -30,8 +30,6 @@ Vue.component("tab-production", {
 
             var result = 0;
 
-            console.log( dockList, this.selectedDock, docks );
-
             const hasImprovedDock = LsManager.get_value( 'improvedDock', 'own' );
             const dockProductionValue = hasImprovedDock ? 4 : 2;
 
