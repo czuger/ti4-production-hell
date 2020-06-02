@@ -16,6 +16,7 @@ const messages = {
             total_cost: 'Total cost',
 
             sarween_tools: 'Sarween tools',
+            improved_dock: 'Space dock II',
 
             choose_dock: 'On which dock do you produce ?'
         }
@@ -37,6 +38,7 @@ const messages = {
             total_cost: 'Coût total',
 
             sarween_tools: 'Outils Sarween',
+            improved_dock: 'Dock spatial II',
 
             choose_dock: 'Sur quel dock produisez vous ?'
         }

@@ -12,7 +12,8 @@ Vue.component("tab-production", {
             producedUnits: { 'inf': 0, 'fig': 0, 'des': 0, 'cru': 0, 'car': 0, 'dread': 0, 'flag': 0, 'sun': 0 },
             totalProducedUnits: 0,
             totalCost: 0,
-            selectedDock: null
+            selectedDock: null,
+            localPlanetsProductionValue: planetsProductionValue
         }
     },
     computed: {
@@ -29,8 +30,13 @@ Vue.component("tab-production", {
 
             var result = 0;
 
+            console.log( dockList, this.selectedDock, docks );
+
+            const hasImprovedDock = LsManager.get_value( 'improvedDock', 'own' );
+            const dockProductionValue = hasImprovedDock ? 4 : 2;
+
             for( var dock of docks ){
-                result += ( planetsProductionValue[ dock ] + 2 )
+                result += ( planetsProductionValue[ dock ] + dockProductionValue )
             }
 
             return result;
@@ -88,7 +94,7 @@ Vue.component("tab-production", {
         </label>
         <select v-model="selectedDock" class="form-control" id="select-dock-id">
           <option v-for="dock in availableDock" v-bind:value="dock">
-            {{ dock }}
+            {{ dock + ' (' + localPlanetsProductionValue[ dock ] + ')' }}
           </option>
         </select>
         <div class="row mt-3" v-for="unit in availableUnits">
@@ -118,8 +124,6 @@ Vue.component("tab-production", {
                 </button>
             </div>
         </div>                           
-                                   
-        
     </div>
 `
 });

@@ -9,37 +9,55 @@ Vue.component("tab-usage", {
         <div v-for="planet in usablePlanets">
             <usable-planet v-bind:planet="planet"></usable-planet>        
         </div>                           
-        <sarween-tools></sarween-tools>
+        <other-options></other-options>
     </div>
 `
 });
 
-Vue.component("sarween-tools", {
+Vue.component("other-options", {
     data() {
         return {
-            own: false
+            sarween_tools: false,
+            improved_dock: false
         };
     },
     template: `
-        <div class="row mt-3">
-            <div class="col-12">
-                <button type="button" class="btn btn-block" @click="getTool()" v-bind:class="[own ? 'btn-warning' : 'btn-info']">
-                    {{ $t( 'message.sarween_tools' ) }}
-                </button>
+        <div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button type="button" class="btn btn-block" @click="swapTools()" v-bind:class="[sarween_tools ? 'btn-warning' : 'btn-secondary']">
+                        {{ $t( 'message.sarween_tools' ) }}
+                    </button>
+                </div>
             </div>
+           <div class="row mt-3">
+                <div class="col-12">
+                    <button type="button" class="btn btn-block" @click="swapDock()" v-bind:class="[improved_dock ? 'btn-warning' : 'btn-secondary']">
+                        {{ $t( 'message.improved_dock' ) }}
+                    </button>
+                </div>
+            </div>        
         </div>
     `,
     methods: {
-        getTool: function () {
-            this.own = !this.own;
+        swapTools: function () {
+            this.sarween_tools = !this.sarween_tools;
+        },
+        swapDock: function () {
+            this.improved_dock = !this.improved_dock;
         }
+
     },
     mounted() {
-        this.own = LsManager.get_value( 'sarweenTools', 'own' );
+        this.sarween_tools = LsManager.get_value( 'sarweenTools', 'own' );
+        this.improved_dock = LsManager.get_value( 'improvedDock', 'own' );
     },
     watch: {
-        own(newStatus) {
+        sarween_tools(newStatus) {
             LsManager.set_value( 'sarweenTools', 'own', newStatus );
+        },
+        improved_dock(newStatus) {
+            LsManager.set_value( 'improvedDock', 'own', newStatus );
         }
     }
 });
