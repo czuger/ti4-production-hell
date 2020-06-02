@@ -83,8 +83,10 @@ Vue.component("tab-production", {
     },
     template: `
     <div>
-        <select v-model="selectedDock" class="form-control mt-3">
-          <option value="Sur quel dock produisez vous" hidden>Sur quel dock produisez vous</option>
+        <label for="select-dock-id" class="mt-1">
+            {{ $t( 'message.choose_dock' ) }}
+        </label>
+        <select v-model="selectedDock" class="form-control" id="select-dock-id">
           <option v-for="dock in availableDock" v-bind:value="dock">
             {{ dock }}
           </option>
