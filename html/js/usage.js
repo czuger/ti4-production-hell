@@ -1,7 +1,7 @@
 Vue.component("tab-usage", {
     computed: {
         usablePlanets: function () {
-            return LsManager.get_selected_items( 'ownedPlanets' );
+            return LsManager.get_selected_items( 'ownedPlanets' ).sort();
         }
     },
     template: `
@@ -67,7 +67,8 @@ Vue.component("usable-planet", {
     data() {
         return {
             planetEngaged: true,
-            hasDock: false
+            hasDock: false,
+            localPlanetsProductionValue: planetsProductionValue
         };
     },
     template: `
@@ -75,6 +76,7 @@ Vue.component("usable-planet", {
             <div class="col-9">
                 <button type="button" class="btn btn-block" @click="planetEngage()" v-bind:class="[planetEngaged ? 'btn-primary' : 'btn-secondary']">
                     {{ planet }}
+                    {{ planet + ' (' + localPlanetsProductionValue[ planet ] + ')' }}
                 </button>
             </div>
             <div class="col-3">
