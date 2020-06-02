@@ -24,7 +24,7 @@ Vue.component("sarween-tools", {
         <div class="row mt-3">
             <div class="col-12">
                 <button type="button" class="btn btn-block" @click="getTool()" v-bind:class="[own ? 'btn-warning' : 'btn-info']">
-                    Outils Sarween
+                    {{ $t( 'message.sarween_tools' ) }}
                 </button>
             </div>
         </div>
@@ -61,7 +61,7 @@ Vue.component("usable-planet", {
             </div>
             <div class="col-3">
                 <button type="button" class="btn btn-block" @click="setDock()" v-bind:class="[hasDock ? 'btn-warning' : 'btn-secondary']">
-                    {{ hasDock ? 'Dock' : 'Rien' }}
+                    {{ hasDock ? 'Dock' : $t('message.nothing') }}
                 </button>
             </div>                
         </div>
