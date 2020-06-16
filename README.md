@@ -23,7 +23,7 @@ In this tab you have to select the planets you own.
 
 As for factions, simply click on the names. Also they turn blue (selected) or grey (unselected).
 
-*Note : planets are ordered alphabetically and you have to manually select all planets in a system. The home systems are at the end of the list (unordered).
+*Note : planets are ordered alphabetically and you have to manually select all planets in a system. The home systems are at the end of the list (unordered).*
 
 ### Tap cards - select options <img src="https://ti4.ieroe.com/pics/usage.svg" alt="Usage image" width="40"/>
 
@@ -41,8 +41,8 @@ This tab is the main tab that allow you to make your production estimations.
 1. Click on the - or + sign to increase the amount of units you want to produce.
 
 You should see changes on the two bottom buttons : 
-1. Number of units : tells you if you can produce that amount of units (according to the number of docks you have in the system and the level of your docks).
-1. Total cost : tells you if you can pay your unit (according to the production value of your untaped cards and if you have Sarween tools).
+1. **Number of units** : tells you if you can produce that amount of units (according to the number of docks you have in the system and the level of your docks).
+1. **Total cost** : tells you if you can pay your unit (according to the production value of your untaped cards and if you have Sarween tools).
 
 That's it, have fun :)
 
