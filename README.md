@@ -46,5 +46,7 @@ You should see changes on the two bottom buttons :
 
 That's it, have fun :)
 
+## Contributing
 
+This project was done over a weekend so there are a lot of improvements that could be done. If you are interested, just fork the project, make your improvements, TEST THEM and then send a pull request.
 
