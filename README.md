@@ -1,4 +1,4 @@
-# ti4-production-hell
+# Twilight Imperium 4 production help
 
 This is a tool that try to help player during the production phase of the board game Twilight Imperium 4 (which can be hell).
 I created it after seeing a buddy having a real hard time to get all the rules involved in it.
