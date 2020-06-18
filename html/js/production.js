@@ -67,11 +67,12 @@ Vue.component("tab-production", {
             [ unit, new_amount ] = _data
             this.producedUnits[ unit ] = new_amount;
 
-            for (let [unit, amount] of Object.entries(this.producedUnits)) {
+            for (const [unit, amount] of Object.entries(this.producedUnits)) {
                 totalAmount += amount;
 
                 const unitCost = unitsCost[ unit ];
-                const cost = unitCost * amount;
+                const cost = Math.ceil( unitCost * amount );
+                console.log( cost );
 
                 totalCost += cost;
             }
@@ -82,7 +83,7 @@ Vue.component("tab-production", {
             }
 
             this.totalProducedUnits = totalAmount;
-            this.totalCost = Math.ceil( totalCost );
+            this.totalCost = totalCost;
         }
     },
     template: `
