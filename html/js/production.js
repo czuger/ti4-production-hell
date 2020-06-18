@@ -72,9 +72,11 @@ Vue.component("tab-production", {
 
                 const unitCost = unitsCost[ unit ];
                 const cost = Math.ceil( unitCost * amount );
-                console.log( cost );
+
+                // console.log( unit, 'cost', cost );
 
                 totalCost += cost;
+                // console.log( 'total cost', totalCost );
             }
 
             const hasSarweenTools = ( LsManager.get_value( 'sarweenTools', 'own' ) === true );
@@ -83,6 +85,7 @@ Vue.component("tab-production", {
             }
 
             this.totalProducedUnits = totalAmount;
+
             this.totalCost = totalCost;
         }
     },
